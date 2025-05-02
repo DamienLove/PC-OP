@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>PC Operator Dashboard</title>
+<style>
+body{font-family:Arial;margin:2rem;background:#111;color:#eee}
+input,button{padding:.6rem;font-size:1rem}
+table{width:100%;border-collapse:collapse;margin-top:1.5rem}
+th,td{border:1px solid #555;padding:.4rem;text-align:left}
+</style>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, query, orderBy, limit, onSnapshot, addDoc } from 
+        "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const app = initializeApp({ projectId: "pc-operator-prod" });   // public projectId only
+const db  = getFirestore(app);
+const tbl = document.querySelector("tbody");
+
+onSnapshot(query(collection(db,"commands"), orderBy("createdAt","desc"), limit(20)), snap=>{
+  tbl.innerHTML = "";
+  snap.forEach(doc=>{
+    const d=doc.data();
+    tbl.insertAdjacentHTML("beforeend",
+      `<tr><td>${doc.id}</td><td>${d.action}</td><td>${d.status}</td><td>${d.createdAt?.toDate().toLocaleString()}</td></tr>`);
+  });
+});
+
+window.enqueue = async () =>{
+  const cmd=document.getElementById("cmd").value;
+  await fetch("https://us-central1-pc-operator-prod.cloudfunctions.net/enqueueCommand",
+    {method:"POST",
+     headers:{ "Content-Type":"application/json", "x-api-key":"xSuperSecretLongTokenx"},
+     body:JSON.stringify({action:"shell",payload:{cmd}})});
+  document.getElementById("cmd").value="";
+};
+</script>
+</head>
+<body>
+<h1>PC Operator Dashboard</h1>
+<input id="cmd" placeholder="echo hello world" style="width:60%" />
+<button onclick="enqueue()">Run command</button>
+
+<table><thead><tr><th>ID</th><th>Action</th><th>Status</th><th>Created</th></tr></thead><tbody></tbody></table>
+</body>
+</html>

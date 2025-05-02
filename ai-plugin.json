@@ -1,0 +1,19 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "PC Operator",
+  "name_for_model": "pc_operator",
+  "description_for_human": "Run shell / AHK commands on Damien’s PC through Firestore.",
+  "description_for_model": "Sends a command to Damien’s PC. Use ONLY when the user explicitly asks to run a shell or AHK command.",
+  "auth": {
+    "type": "api_key",
+    "authorization_type": "header",
+    "header_name": "x-api-key"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://agent-tunnel.example.com/openapi.yml"
+  },
+  "logo_url": "https://agent-tunnel.example.com/logo.png",
+  "contact_email": "damienlovemusic@gmail.com",
+  "legal_info_url": "https://github.com/DamienLove/PC-Operator-Prod/blob/master/LICENSE"
+}
