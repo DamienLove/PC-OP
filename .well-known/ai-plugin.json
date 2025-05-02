@@ -1,0 +1,9 @@
+{
+  "schema_version":"v1",
+  "name_for_human":"PC Operator",
+  "name_for_model":"pc_operator",
+  "description_for_human":"Run shell or AHK commands on your PC.",
+  "description_for_model":"Enqueue a command. Use only when user clearly asks to run code on the PC.",
+  "auth":{"type":"api_key","authorization_type":"header","header_name":"x-api-key"},
+  "api":{"type":"openapi","url":"https://operator.yourdomain.com/.well-known/openapi.yml"}
+}

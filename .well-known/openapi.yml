@@ -1,0 +1,30 @@
+openapi: 3.1.0
+info: {title: PC Operator API, version: "1.0.0"}
+paths:
+  /enqueueCommand:
+    post:
+      summary: Enqueue a shell or AutoHotkey command
+      security: [{api_key: []}]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/Cmd"}
+      responses:
+        "200":
+          description: ID of created Firestore doc
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {id: {type: string}}
+components:
+  securitySchemes:
+    api_key: {type: apiKey, in: header, name: x-api-key}
+  schemas:
+    Cmd:
+      type: object
+      required: [action,payload]
+      properties:
+        action: {type: string, enum: [shell, ahk]}
+        payload: {type: object}
