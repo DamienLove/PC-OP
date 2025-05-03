@@ -1,0 +1,8 @@
+@"
+tunnel: pc-operator-static
+credentials-file: $env:USERPROFILE\.cloudflared\8d4e022e-6e45-4ddc-ba00-4b84170a4090.json
+ingress:
+  - hostname: operator.magicalmystery.store   # use YOUR real sub‑domain
+    service: http://localhost:5500
+  - service: http_status:404
+"@ | Set-Content $env:USERPROFILE\.cloudflared\config.yml -Encoding ascii
