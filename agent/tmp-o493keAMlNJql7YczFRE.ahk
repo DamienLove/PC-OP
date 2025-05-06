@@ -1,0 +1,1 @@
+MsgBox, AHK is working!
