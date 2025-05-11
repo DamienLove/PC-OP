@@ -3,7 +3,7 @@ import os, json, openai, requests
 # -------------------------------------------------
 # 1)  Set your OpenAI API key in the environment
 #     PowerShell (once per terminal):
-#       $Env:OPENAI_API_KEY="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"
+#       $Env:OPENAI_API_KEY="sk..."
 # -------------------------------------------------
 openai.api_key = os.getenv("OPENAI_API_KEY")        # <-- keep None if not set
 if openai.api_key is None:
