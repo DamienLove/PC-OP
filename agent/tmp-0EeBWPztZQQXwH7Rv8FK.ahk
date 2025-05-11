@@ -1,0 +1,1 @@
+MsgBox('AHK v2 works');
